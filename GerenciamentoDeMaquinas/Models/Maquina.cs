@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace GerenciamentoDeMaquinas.Models
 {
-    internal class Maquina
+    public class Maquina
     {
+        public string NomeLogico { get; set; }
+        public string NumeroSerie { get; set; }
     }
 }
