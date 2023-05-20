@@ -8,6 +8,13 @@ namespace GerenciamentoDeMaquinas.Models
 {
     public class Maquina
     {
+        public Maquina(int estacaoDeTrabalho, string nomeLogico, string numeroSerie)
+        {
+            EstacaoDeTrabalho = estacaoDeTrabalho;
+            NomeLogico = nomeLogico;
+            NumeroSerie = numeroSerie;
+        }
+        public int EstacaoDeTrabalho { get; set; }
         public string NomeLogico { get; set; }
         public string NumeroSerie { get; set; }
     }
