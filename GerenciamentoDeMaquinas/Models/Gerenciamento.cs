@@ -33,8 +33,10 @@ namespace GerenciamentoDeMaquinas.Models
 
                 while (true)
                 {
+                    Console.WriteLine("\n----------------------------------------------------");
                     Console.WriteLine($"\nDeseja adicionar:\n\nPA: {pa}\nNome Lógico: {nomeLogico}\nNúmero de Série: {numeroSerie}\n");
-                    Console.Write("(S/N) >>");
+                    Console.WriteLine("Na sua lista de máquinas?\n");
+                    Console.Write("(S/N) >> ");
                     string opcao = Console.ReadLine();
 
                     switch (opcao.ToLower())
@@ -42,19 +44,23 @@ namespace GerenciamentoDeMaquinas.Models
                         case "s":
                             if (VerificarMaquina(maquinas, pa))
                             {
-                                Console.WriteLine("Máquina já cadastrada.");
+                                Console.WriteLine("\n\n!!! Máquina já consta no cadastro. !!!");
+                                Console.WriteLine("\n----------------------------------------------------");
                             }
                             else
                             {
                                 maquinas.Add(new Maquina(pa, nomeLogico, numeroSerie));
-                                Console.WriteLine("Máquina cadastrada com sucesso!");
+                                Console.WriteLine("\n\n*** Máquina cadastrada com sucesso. ***");
+                                Console.WriteLine("\n----------------------------------------------------");
                             }
                             break;
                         case "n":
-                            Console.WriteLine("Máquina não foi adicionada!");
+                            Console.WriteLine("\n\n*** Máquina não foi adicionada. ***");
+                            Console.WriteLine("\n----------------------------------------------------");
                             break;
                         default:
-                            Console.WriteLine("Favor, digite uma opção válida.");
+                            Console.WriteLine("\n\n!!! Favor, digite uma opção válida. !!!");
+                            Console.ReadKey();
                             break;
                     }
 
@@ -65,7 +71,7 @@ namespace GerenciamentoDeMaquinas.Models
                 }
 
                 Console.WriteLine("\nDeseja adicionar outra máquina?");
-                Console.Write("(S/N) >>");
+                Console.Write("(S/N) >> ");
                 string resposta = Console.ReadLine();
 
                 if (resposta.ToLower() != "s")
