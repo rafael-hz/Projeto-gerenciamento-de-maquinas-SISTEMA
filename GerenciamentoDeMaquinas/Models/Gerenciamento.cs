@@ -85,6 +85,71 @@ namespace GerenciamentoDeMaquinas.Models
         {
             Console.Clear();
             Console.WriteLine("------------------ Alterar Máquina ------------------");
+
+            Console.WriteLine("\n\nInforme a Estação de Trabalho(PA) que deseja alterar.");
+            Console.Write(">> ");
+            int pa = int.Parse(Console.ReadLine());
+
+            if (VerificarMaquina(maquinas, pa))
+            {
+                Console.WriteLine("\n----------------------------------------------------");
+                Maquina estacaoTrabalhoEncontrado = maquinas.Find(x => x.EstacaoDeTrabalho == pa);
+
+                Console.WriteLine($"\n\nInformações sobre a Estação de Trabalho(PA):\n");
+                Console.WriteLine($"PA: {estacaoTrabalhoEncontrado.EstacaoDeTrabalho}\n" +
+                                  $"Nome Lógico: {estacaoTrabalhoEncontrado.NomeLogico}\n" +
+                                  $"Número de Série: {estacaoTrabalhoEncontrado.NumeroSerie}");
+                while (true)
+                {
+                    Console.WriteLine("\n----------------------------------------------------");
+                    Console.WriteLine("\n\n\nInforme qual opção desejaria trocar.\n\n" +
+                                      "1 - Nome Lógico\n" +
+                                      "2 - Número de Série\n");
+                    Console.Write(">> ");
+                    string opcao = Console.ReadLine();
+
+                    switch (opcao)
+                    {
+                        case "1":
+
+                            Console.WriteLine($"\nDigite o novo Nome Lógico.");
+                            Console.Write(">> ");
+                            string novoNomeLogico = Console.ReadLine();
+                            estacaoTrabalhoEncontrado.NomeLogico = novoNomeLogico;
+
+                            Console.WriteLine($"\nNome Lógico alterado com suceso.");
+                            break;
+
+                        case "2":
+
+                            Console.WriteLine($"\nDigite o novo Número de Série.");
+                            Console.Write(">> ");
+                            string novoNumeroSerie = Console.ReadLine();
+                            estacaoTrabalhoEncontrado.NumeroSerie = novoNumeroSerie;
+
+                            Console.WriteLine($"\nNúmero de Série alterado com suceso.");
+                            break;
+
+                        default:
+                            Console.WriteLine("\nFavor, digite uma opção válida.");
+                            Console.ReadKey();
+                            break;
+                    }
+
+                    Console.WriteLine("\nDeseja ir para o Menu?");
+                    Console.Write("(S/N) >>");
+                    string resposta = Console.ReadLine().ToLower();
+
+                    if (resposta.ToLower() == "s") break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("\n\n!!! Máquina não consta no cadastro. !!!");
+                Console.WriteLine("\n----------------------------------------------------");
+                Console.ReadKey();
+            }
+
         }
 
         public void RemoverMaquina()
