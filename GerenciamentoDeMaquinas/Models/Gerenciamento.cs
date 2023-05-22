@@ -154,8 +154,54 @@ namespace GerenciamentoDeMaquinas.Models
 
         public void RemoverMaquina()
         {
+            
             Console.Clear();
             Console.WriteLine("------------------ Remover Máquina ------------------");
+            Console.WriteLine("\n\nInforme a Estação de Trabalho(PA) da máquina que deseja remover");
+            Console.Write(">> ");
+            int pa = int.Parse(Console.ReadLine());
+
+            if (VerificarMaquina(maquinas, pa))
+            {
+                Maquina estacaoTrabalhoEncontrado = maquinas.Find(x => x.EstacaoDeTrabalho == pa);
+
+                while (true)
+                {
+                    Console.WriteLine("\n----------------------------------------------------");
+                    Console.WriteLine($"\n\nInformações sobre a Estação de Trabalho(PA):\n");
+                    Console.WriteLine($"PA: {estacaoTrabalhoEncontrado.EstacaoDeTrabalho}\n" +
+                                        $"Nome Lógico: {estacaoTrabalhoEncontrado.NomeLogico}\n" +
+                                        $"Número de Série: {estacaoTrabalhoEncontrado.NumeroSerie}");
+                    Console.WriteLine("\nDeseja remover da lista de máquinas?");
+                    Console.Write("(S/N)>> ");
+                    string opcao = Console.ReadLine();
+                    switch (opcao)
+                    {
+                        case "s":
+                            maquinas.Remove(estacaoTrabalhoEncontrado);
+                            Console.WriteLine("\n\n*** Máquina removida com sucesso. ***");
+                            Console.WriteLine("\n----------------------------------------------------");
+                            Console.ReadKey();
+                            break;
+                        case "n":
+                            Console.WriteLine("\n\n!!! Máquina não removida. !!!");
+                            Console.WriteLine("\n----------------------------------------------------");
+                            Console.ReadKey();
+                            break;
+                        default:
+                            Console.WriteLine("\nFavor, digite uma opção válida.");
+                            Console.ReadKey();
+                            break;
+                    }
+                    if (opcao == "s" || opcao == "n") break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("\n\n!!! Máquina não consta no cadastro. !!!");
+                Console.WriteLine("\n----------------------------------------------------");
+                Console.ReadKey();
+            }
         }
 
         public void BuscarMaquina()
